@@ -25,7 +25,15 @@ function singIn(email, password) {
         });
 }
 
-function report(ownerFullName, licenseNumber, type) {
+function report(
+    ownerFullName,
+    licenseNumber,
+    type,
+    color,
+    date,
+    description,
+    resolution
+) {
     return fetch(
         "https://sf-final-project-be.herokuapp.com/api/public/report",
         {
@@ -43,6 +51,10 @@ function report(ownerFullName, licenseNumber, type) {
                 ownerFullName: ownerFullName,
                 licenseNumber: licenseNumber,
                 type: type,
+                color: color,
+                date: date,
+                description: description,
+                resolution: resolution,
                 clientId: "b5813d16-20bc-4e8e-97ad-ff92cc9532c2",
             }), // body data type must match "Content-Type" header
         }

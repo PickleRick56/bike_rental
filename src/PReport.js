@@ -8,6 +8,10 @@ function PReport({ signintoken }) {
     const ownerFullNameElements = useRef();
     const licenseNumberElements = useRef();
     const typeElements = useRef();
+    const colorElements = useRef();
+    const dateElements = useRef();
+    const descriptionElements = useRef();
+    const resolutionElements = useRef();
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
     console.log(retrievedFromStore);
     return (
@@ -41,6 +45,46 @@ function PReport({ signintoken }) {
                     />
                 </label>
 
+                <label>
+                    Enter color :
+                    <input
+                        id="colorElements"
+                        ref={colorElements}
+                        type="text"
+                        required
+                    />
+                </label>
+
+                <label>
+                    Enter date :
+                    <input
+                        id="dateElements"
+                        ref={dateElements}
+                        type="text"
+                        required
+                    />
+                </label>
+
+                <label>
+                    Enter description :
+                    <input
+                        id="descriptionElements"
+                        ref={descriptionElements}
+                        type="text"
+                        required
+                    />
+                </label>
+
+                <label>
+                    Enter resolution :
+                    <input
+                        id="resolutionElements"
+                        ref={resolutionElements}
+                        type="text"
+                        required
+                    />
+                </label>
+
                 <label>Choose a type:</label>
 
                 <select
@@ -59,7 +103,11 @@ function PReport({ signintoken }) {
                         report(
                             ownerFullNameElements.current.value,
                             licenseNumberElements.current.value,
-                            typeElements.current.value
+                            typeElements.current.value,
+                            colorElements.current.value,
+                            dateElements.current.value,
+                            descriptionElements.current.value,
+                            resolutionElements.current.value
                         );
                     }}
                 >
