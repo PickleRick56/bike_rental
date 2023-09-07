@@ -11,7 +11,7 @@ function PReport({ signintoken }) {
     const colorElements = useRef();
     const dateElements = useRef();
     const descriptionElements = useRef();
-    const resolutionElements = useRef();
+
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
     console.log(retrievedFromStore);
     return (
@@ -75,16 +75,6 @@ function PReport({ signintoken }) {
                     />
                 </label>
 
-                <label>
-                    Enter resolution :
-                    <input
-                        id="resolutionElements"
-                        ref={resolutionElements}
-                        type="text"
-                        required
-                    />
-                </label>
-
                 <label>Choose a type:</label>
 
                 <select
@@ -106,8 +96,7 @@ function PReport({ signintoken }) {
                             typeElements.current.value,
                             colorElements.current.value,
                             dateElements.current.value,
-                            descriptionElements.current.value,
-                            resolutionElements.current.value
+                            descriptionElements.current.value
                         );
                     }}
                 >

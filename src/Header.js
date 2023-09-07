@@ -41,17 +41,17 @@ function Header() {
     //     .then((json) => console.log(json));
 
     // ЗАПРОС ПОЛУЧЕНИЯ ВСЕХ СООБЩЕНИЙ
-    fetch("https://sf-final-project-be.herokuapp.com/api/cases/", {
-        method: "GET",
+    // fetch("https://sf-final-project-be.herokuapp.com/api/cases/", {
+    //     method: "GET",
 
-        headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZWE5ODM0M2VmNWZhYmI5Mjc3YWQzZSIsImlhdCI6MTY5MzMyODI2MywiZXhwIjoxNjkzOTMzMDYzfQ.C17aRFTEWf0RxhZa83qdDl6zMk8JV-FOGnKCD5AbkWU",
-        },
-    })
-        .then((response) => response.json())
-        .then((json) => console.log(json));
+    //     headers: {
+    //         "Content-type": "application/json; charset=UTF-8",
+    //         Authorization:
+    //             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZWE5ODM0M2VmNWZhYmI5Mjc3YWQzZSIsImlhdCI6MTY5MzMyODI2MywiZXhwIjoxNjkzOTMzMDYzfQ.C17aRFTEWf0RxhZa83qdDl6zMk8JV-FOGnKCD5AbkWU",
+    //     },
+    // })
+    //     .then((response) => response.json())
+    //     .then((json) => console.log(json));
 
     // токен "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDRmMDUxODY3ZjNjNzUyM2M3MTNmNCIsImlhdCI6MTY5MjU0MjE3OSwiZXhwIjoxNjkzMTQ2OTc5fQ.XlGKgq3WO-VIzInYkv-oLtpEC4gK0ZELNP8AuVvU0AI"
 

@@ -54,7 +54,7 @@ function report(
                 color: color,
                 date: date,
                 description: description,
-                resolution: resolution,
+
                 clientId: "b5813d16-20bc-4e8e-97ad-ff92cc9532c2",
             }), // body data type must match "Content-Type" header
         }
@@ -69,7 +69,7 @@ function report(
         });
 }
 
-function authorization(ownerFullName, licenseNumber, type) {
+function authorization(authToken) {
     return fetch("https://sf-final-project-be.herokuapp.com/api/auth/", {
         method: "GET",
 
@@ -86,5 +86,17 @@ function authorization(ownerFullName, licenseNumber, type) {
         });
 }
 
+function getAllCases() {
+    return fetch("https://sf-final-project-be.herokuapp.com/api/cases/", {
+        method: "GET",
+
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZWE5ODM0M2VmNWZhYmI5Mjc3YWQzZSIsImlhdCI6MTY5MzczMTcwOCwiZXhwIjoxNjk0MzM2NTA4fQ.Jd251bu4SzFJMblZ3pdV5qhTU8VsSYAXVlMxGrSOTlM",
+        },
+    }).then((response) => response.json());
+}
+
 // 👇️ named exports
-export { singIn, report, authorization };
+export { singIn, report, authorization, getAllCases };
