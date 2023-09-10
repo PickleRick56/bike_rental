@@ -1,21 +1,33 @@
 import { NavLink } from "react-router-dom";
 import { addTodo, replacementTodo, allCaseTodo } from "./todoSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { singIn, report, authorization, getAllCases } from "./request";
+import { getAllCases, deleteCaseReq } from "./request";
 import { useState, useEffect, useId } from "react";
 
-function AllCase({ prop }) {
-    const [data, setData] = useState([]);
-    const messageId = `message${useId()}`;
+function AllCase() {
+    const [dataAllCase, setDataAllCase] = useState([]);
+
     const dispatch = useDispatch();
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
     async function waitForCases() {
         let data;
         let awitFetch = await getAllCases();
         data = await awitFetch;
-        setData(await awitFetch.data);
+        setDataAllCase(await awitFetch.data);
         dispatch(allCaseTodo(data));
         console.log(retrievedFromStore);
+    }
+    console.log(dataAllCase);
+    function deleteCase(e) {
+        let a = [];
+        dataAllCase.map((k) => {
+            if (k["_id"] != e) {
+                a.push(k);
+            }
+        });
+        setDataAllCase([...a]);
+        deleteCaseReq(e);
+        console.log(a);
     }
 
     return (
@@ -23,20 +35,31 @@ function AllCase({ prop }) {
             <h1> Тут выводим все кейсы</h1>
             <NavLink to="/detailCase">Детальная страница РЕПОРТА</NavLink>
             <button
-                onClick={() => {
+                onClick={(evt) => {
+                    evt.preventDefault();
                     waitForCases();
                 }}
             >
                 Запросить все события
             </button>
 
-            {data.length > 0 ? (
+            {dataAllCase.length > 0 ? (
                 <div className="allCasesHere">
-                    {data.map((keys) => (
+                    {dataAllCase.map((keys) => (
                         <div id={keys["_id"]} className="example">
                             <NavLink to="/detailCase" state={{ T: keys }}>
                                 {keys.ownerFullName}
                             </NavLink>
+                            <button
+                                onClick={(evt) => {
+                                    evt.preventDefault();
+                                    deleteCase(evt.target.parentElement.id);
+
+                                    console.log(evt.target.parentElement.id);
+                                }}
+                            >
+                                X
+                            </button>
                         </div>
                     ))}
                 </div>

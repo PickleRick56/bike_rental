@@ -1,3 +1,6 @@
+const FETCH_TOKEN =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDRmMDUxODY3ZjNjNzUyM2M3MTNmNCIsImlhdCI6MTY5NDM1MjExNSwiZXhwIjoxNjk0OTU2OTE1fQ.zblqGh-0Ae65eepBhot6QHWOTlf6IT6ORq64dk7V2B4";
+
 function singIn(email, password) {
     return fetch("https://sf-final-project-be.herokuapp.com/api/auth/sign_in", {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -75,8 +78,7 @@ function authorization(authToken) {
 
         headers: {
             "Content-type": "application/json; charset=UTF-8",
-            Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDRmMDUxODY3ZjNjNzUyM2M3MTNmNCIsImlhdCI6MTY5MjU0MjE3OSwiZXhwIjoxNjkzMTQ2OTc5fQ.XlGKgq3WO-VIzInYkv-oLtpEC4gK0ZELNP8AuVvU0AI",
+            Authorization: `Bearer ${FETCH_TOKEN}`,
         },
     })
         .then((response) => response.json())
@@ -92,11 +94,27 @@ function getAllCases() {
 
         headers: {
             "Content-type": "application/json; charset=UTF-8",
-            Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZWE5ODM0M2VmNWZhYmI5Mjc3YWQzZSIsImlhdCI6MTY5MzczMTcwOCwiZXhwIjoxNjk0MzM2NTA4fQ.Jd251bu4SzFJMblZ3pdV5qhTU8VsSYAXVlMxGrSOTlM",
+            Authorization: `Bearer ${FETCH_TOKEN}`,
         },
     }).then((response) => response.json());
 }
 
+function deleteCaseReq(caseId) {
+    return fetch(
+        `https://sf-final-project-be.herokuapp.com/api/cases/${caseId}`,
+        {
+            method: "DELETE",
+
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+
+                Authorization: `Bearer ${FETCH_TOKEN}`,
+            },
+        }
+    )
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+}
+
 // 👇️ named exports
-export { singIn, report, authorization, getAllCases };
+export { singIn, report, authorization, getAllCases, deleteCaseReq };

@@ -7,10 +7,6 @@ import { useState, useEffect, useId } from "react";
 function DetailCase({ prop }) {
     const location = useLocation();
 
-    useEffect(() => {
-        console.log(location);
-    }, []);
-
     return (
         <div>
             <h1> Детализированная РЕПОРТ page</h1>
