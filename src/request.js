@@ -117,6 +117,8 @@ function deleteCaseReq(caseId) {
 }
 
 function editCaseReq(caseId, jSonObject) {
+    let newjSonObject = jSonObject;
+    newjSonObject.clientId = "b5813d16-20bc-4e8e-97ad-ff92cc9532c2";
     return fetch(
         `https://sf-final-project-be.herokuapp.com/api/cases/${caseId}`,
         {
