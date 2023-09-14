@@ -11,22 +11,22 @@ import DetailCase from "./DetailCase";
 function App() {
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
     let data = retrievedFromStore[1].text.data;
+    console.log(data, "дата всех кейсов для роутинга ");
+
     return (
         <div className="App">
             <Header />
+
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/detailCase" element={<DetailCase />} />
-
-                {/* {data.map((key) => (
-                    <Route
-                        path={`${key["_id"]}`}
-                        element={<DetailCase prop={key} />}
-                    />
-                ))} */}
-
+                {typeof data === "undefined"
+                    ? "a"
+                    : data.map((key) => (
+                          <Route path={key["_id"]} element={<DetailCase />} />
+                      ))}
                 <Route path="*" element={<Error />} />
             </Routes>
         </div>

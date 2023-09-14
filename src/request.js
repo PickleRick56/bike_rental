@@ -116,5 +116,30 @@ function deleteCaseReq(caseId) {
         .then((json) => console.log(json));
 }
 
+function editCaseReq(caseId, jSonObject) {
+    return fetch(
+        `https://sf-final-project-be.herokuapp.com/api/cases/${caseId}`,
+        {
+            method: "PUT",
+
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+
+                Authorization: `Bearer ${FETCH_TOKEN}`,
+            },
+            body: JSON.stringify(jSonObject),
+        }
+    )
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+}
+
 // 👇️ named exports
-export { singIn, report, authorization, getAllCases, deleteCaseReq };
+export {
+    singIn,
+    report,
+    authorization,
+    getAllCases,
+    deleteCaseReq,
+    editCaseReq,
+};
