@@ -89,7 +89,6 @@ function DetailCase({ prop }) {
                             color: colorElements.current.value,
                             date: dateElements.current.value,
                             description: descriptionElements.current.value,
-                            clientId: "b5813d16-20bc-4e8e-97ad-ff92cc9532c2",
                         };
 
                         for (let key in newJSObject) {

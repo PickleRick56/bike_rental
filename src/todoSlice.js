@@ -22,6 +22,10 @@ const initialState = {
             id: Date.now(),
             text: {},
         },
+        {
+            id: Date.now(),
+            text: {},
+        },
     ],
 };
 
@@ -38,6 +42,9 @@ const todoSlice = createSlice({
         allCaseTodo: (state, action) => {
             state.tasks[1] = { id: Date.now(), text: action.payload };
         },
+        allOfficersTodo: (state, action) => {
+            state.tasks[2] = { id: Date.now(), text: action.payload };
+        },
         deleteTodo: (state, action) => {
             state.tasks = state.tasks.filter(
                 (task) => task.id !== action.payload
@@ -46,7 +53,12 @@ const todoSlice = createSlice({
     },
 });
 
-export const { addTodo, deleteTodo, replacementTodo, allCaseTodo } =
-    todoSlice.actions;
+export const {
+    addTodo,
+    deleteTodo,
+    replacementTodo,
+    allCaseTodo,
+    allOfficersTodo,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;

@@ -15,9 +15,8 @@ function AllCase() {
         data = await awitFetch;
         setDataAllCase(await awitFetch.data);
         dispatch(allCaseTodo(data));
-        console.log(retrievedFromStore);
     }
-    console.log(dataAllCase);
+
     function deleteCase(e) {
         let a = [];
         dataAllCase.map((k) => {

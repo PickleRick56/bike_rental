@@ -1,5 +1,5 @@
 const FETCH_TOKEN =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDRmMDUxODY3ZjNjNzUyM2M3MTNmNCIsImlhdCI6MTY5NDM1MjExNSwiZXhwIjoxNjk0OTU2OTE1fQ.zblqGh-0Ae65eepBhot6QHWOTlf6IT6ORq64dk7V2B4";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MDg1NGQ5ZTVkODdhNTlmNzg3YTM4YiIsImlhdCI6MTY5NTA0NDkxNSwiZXhwIjoxNjk1NjQ5NzE1fQ.hnLQyYNuuR-dw1CHD2HrgYkB3qH0hKWhWznk55VmU58";
 
 function singIn(email, password) {
     return fetch("https://sf-final-project-be.herokuapp.com/api/auth/sign_in", {
@@ -58,7 +58,7 @@ function report(
                 date: date,
                 description: description,
 
-                clientId: "b5813d16-20bc-4e8e-97ad-ff92cc9532c2",
+                clientId: "0718e5e8-fb23-4947-9f4c-9eea84446cc3",
             }), // body data type must match "Content-Type" header
         }
     )
@@ -104,6 +104,9 @@ function deleteCaseReq(caseId) {
         `https://sf-final-project-be.herokuapp.com/api/cases/${caseId}`,
         {
             method: "DELETE",
+            body: JSON.stringify({
+                clientId: "0718e5e8-fb23-4947-9f4c-9eea84446cc3",
+            }),
 
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
@@ -136,6 +139,53 @@ function editCaseReq(caseId, jSonObject) {
         .then((json) => console.log(json));
 }
 
+function getAllOfficersreq() {
+    return fetch(`https://sf-final-project-be.herokuapp.com/api/officers/`, {
+        method: "GET",
+
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+
+            Authorization: `Bearer ${FETCH_TOKEN}`,
+        },
+    }).then((response) => response.json());
+}
+function deleteOfficersreq(officersId) {
+    return fetch(
+        `https://sf-final-project-be.herokuapp.com/api/officers/${officersId}`,
+        {
+            method: "DELETE",
+
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+
+                Authorization: `Bearer ${FETCH_TOKEN}`,
+            },
+        }
+    )
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+}
+
+function editOfficerReq(caseId, jSonObject) {
+    let newjSonObject = jSonObject;
+    newjSonObject.clientId = "0718e5e8-fb23-4947-9f4c-9eea84446cc3";
+    return fetch(
+        `https://sf-final-project-be.herokuapp.com/api/officers/${caseId}`,
+        {
+            method: "PUT",
+
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+
+                Authorization: `Bearer ${FETCH_TOKEN}`,
+            },
+            body: JSON.stringify(jSonObject),
+        }
+    )
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+}
 // 👇️ named exports
 export {
     singIn,
@@ -144,4 +194,7 @@ export {
     getAllCases,
     deleteCaseReq,
     editCaseReq,
+    getAllOfficersreq,
+    deleteOfficersreq,
+    editOfficerReq,
 };

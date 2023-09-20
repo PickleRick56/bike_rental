@@ -7,11 +7,15 @@ import Contact from "./Contact";
 import Header from "./Header";
 import Error from "./ErrorPage";
 import DetailCase from "./DetailCase";
+import DetailOfficersData from "./DetailOfficersData";
 
 function App() {
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
-    let data = retrievedFromStore[1].text.data;
-    console.log(data, "дата всех кейсов для роутинга ");
+
+    let Casedata = retrievedFromStore[1].text.data;
+    let Officersdata = retrievedFromStore[2].text;
+    console.log(retrievedFromStore, "дата всех officers для роутинга ");
+    console.log(typeof Officersdata);
 
     return (
         <div className="App">
@@ -22,11 +26,22 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/detailCase" element={<DetailCase />} />
-                {typeof data === "undefined"
-                    ? "a"
-                    : data.map((key) => (
+
+                {typeof Casedata === "undefined"
+                    ? "нет кейсов"
+                    : Casedata.map((key) => (
                           <Route path={key["_id"]} element={<DetailCase />} />
                       ))}
+
+                {Object.keys(Officersdata).length === 0
+                    ? "нет оффицеров"
+                    : Officersdata.map((key) => (
+                          <Route
+                              path={key["_id"]}
+                              element={<DetailOfficersData />}
+                          />
+                      ))}
+
                 <Route path="*" element={<Error />} />
             </Routes>
         </div>

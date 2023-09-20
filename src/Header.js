@@ -86,11 +86,11 @@ function Header() {
     // fetch("https://sf-final-project-be.herokuapp.com/api/auth/sign_up", {
     //     method: "POST",
     //     body: JSON.stringify({
-    //         email: "333cccasds222ad@gmail.com",
+    //         email: "a126d222sdffsdfr@gmail.com",
     //         password: "12345",
-    //         firstName: "Alex",
-    //         lastName: "Sandro",
-    //         clientId: "b5813d16-20bc-4e8e-97ad-ff92cc9532c2",
+    //         firstName: "delete",
+    //         lastName: "me",
+    //         clientId: "0718e5e8-fb23-4947-9f4c-9eea84446cc3",
     //     }),
     //     headers: {
     //         "Content-type": "application/json; charset=UTF-8",
