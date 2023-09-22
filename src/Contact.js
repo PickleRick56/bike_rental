@@ -7,6 +7,7 @@ import { useState, useEffect, useId } from "react";
 function Contact() {
     const [officersData, setOfficersData] = useState([]);
     const dispatch = useDispatch();
+    const retrievedFromStore = useSelector((state) => state.todo.tasks);
 
     async function waitForgetAllOfficers() {
         let data;
@@ -33,43 +34,63 @@ function Contact() {
     return (
         <div>
             <h1>This is the Officers page</h1>
-            <button
-                onClick={(evt) => {
-                    evt.preventDefault();
-                    waitForgetAllOfficers();
-                }}
-            >
-                Запросить всех пользователей
-            </button>
+
+            {retrievedFromStore[0].text.data.user.approved !== false ? (
+                <button
+                    onClick={(evt) => {
+                        evt.preventDefault();
+                        waitForgetAllOfficers();
+                    }}
+                >
+                    Запросить всех пользователей
+                </button>
+            ) : (
+                ""
+            )}
+
             <NavLink to="/">Click to view our home page</NavLink>
             <NavLink to="/about">Click to view our about page</NavLink>
 
-            {officersData.length > 0 ? (
-                <div className="allOfficersData">
-                    {officersData.map((keys) => (
-                        <div
-                            key={keys["_id"]}
-                            id={keys["_id"]}
-                            className="example"
-                        >
-                            <NavLink to={`/${keys["_id"]}`} state={{ Z: keys }}>
-                                {keys.firstName} {keys.lastName}
-                            </NavLink>
-                            <button
-                                onClick={(evt) => {
-                                    evt.preventDefault();
-                                    deleteOfficer(evt.target.parentElement.id);
+            {retrievedFromStore[0].text.data.user.approved !== false ? (
+                <div>
+                    {" "}
+                    {officersData.length > 0 ? (
+                        <div className="allOfficersData">
+                            {officersData.map((keys) => (
+                                <div
+                                    key={keys["_id"]}
+                                    id={keys["_id"]}
+                                    className="example"
+                                >
+                                    <NavLink
+                                        to={`/${keys["_id"]}`}
+                                        state={{ Z: keys }}
+                                    >
+                                        {keys.firstName} {keys.lastName}
+                                    </NavLink>
+                                    <button
+                                        onClick={(evt) => {
+                                            evt.preventDefault();
+                                            deleteOfficer(
+                                                evt.target.parentElement.id
+                                            );
 
-                                    console.log(evt.target.parentElement.id);
-                                }}
-                            >
-                                X
-                            </button>
+                                            console.log(
+                                                evt.target.parentElement.id
+                                            );
+                                        }}
+                                    >
+                                        X
+                                    </button>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    ) : (
+                        ""
+                    )}
                 </div>
             ) : (
-                "тут ничего"
+                ""
             )}
         </div>
     );

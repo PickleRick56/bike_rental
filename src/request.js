@@ -1,6 +1,5 @@
 const fisrtAdress = "adress31@gmail.com";
-const FETCH_TOKEN =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MDg1NGQ5ZTVkODdhNTlmNzg3YTM4YiIsImlhdCI6MTY5NTA0NDkxNSwiZXhwIjoxNjk1NjQ5NzE1fQ.hnLQyYNuuR-dw1CHD2HrgYkB3qH0hKWhWznk55VmU58";
+let FETCH_TOKEN = "";
 
 function singIn(email, password) {
     return fetch("https://sf-final-project-be.herokuapp.com/api/auth/sign_in", {
@@ -24,6 +23,8 @@ function singIn(email, password) {
         })
         .then(function (json) {
             // setJsondata(json);
+            FETCH_TOKEN = json.data.token;
+            console.log(typeof FETCH_TOKEN, " это фетч токен");
             console.log(json);
             return json;
         });

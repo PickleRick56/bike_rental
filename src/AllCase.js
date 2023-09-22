@@ -32,9 +32,7 @@ function AllCase() {
     return (
         <div>
             <h1> Тут выводим все кейсы</h1>
-            <NavLink to="/64e22461059e786f1638d195">
-                Детальная страница РЕПОРТА
-            </NavLink>
+
             <button
                 onClick={(evt) => {
                     evt.preventDefault();
@@ -65,7 +63,7 @@ function AllCase() {
                     ))}
                 </div>
             ) : (
-                "тут ничего"
+                ""
             )}
         </div>
     );

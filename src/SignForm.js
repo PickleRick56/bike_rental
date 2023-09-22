@@ -6,16 +6,33 @@ import { useSelector, useDispatch } from "react-redux";
 
 function SignForm({ setSignInToken }) {
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
+    const dispatch = useDispatch();
     const emailElements = useRef();
     const passwordElements = useRef();
-    const dispatch = useDispatch();
+    function logOut() {
+        dispatch(
+            replacementTodo({
+                status: null,
+                data: {
+                    token: null,
+                    user: {
+                        id: null,
+                        email: null,
+                        firstName: null,
+                        lastName: null,
+                        approved: false,
+                    },
+                },
+            })
+        );
+    }
 
     return (
         <>
             {retrievedFromStore[0].text.data.user.approved !== false ? (
                 <div>
                     {retrievedFromStore[0].text.data.user.firstName}{" "}
-                    <button>LogOut</button>
+                    <button onClick={logOut}>LogOut</button>
                 </div>
             ) : (
                 <div>
@@ -59,7 +76,7 @@ function SignForm({ setSignInToken }) {
                     <div>
                         {" "}
                         <NavLink to="/singupPage">
-                            Регистрация нового пользователя
+                            <button>Регистрация нового пользователя</button>
                         </NavLink>
                     </div>
                 </div>

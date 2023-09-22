@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { addTodo, replacementTodo } from "./todoSlice";
+
 import { useSelector, useDispatch } from "react-redux";
 import PReport from "./PReport";
 import AllCase from "./AllCase";
