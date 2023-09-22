@@ -1,3 +1,4 @@
+const fisrtAdress = "adress31@gmail.com";
 const FETCH_TOKEN =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MDg1NGQ5ZTVkODdhNTlmNzg3YTM4YiIsImlhdCI6MTY5NTA0NDkxNSwiZXhwIjoxNjk1NjQ5NzE1fQ.hnLQyYNuuR-dw1CHD2HrgYkB3qH0hKWhWznk55VmU58";
 

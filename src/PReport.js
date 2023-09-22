@@ -11,9 +11,11 @@ function PReport({ signintoken }) {
     const colorElements = useRef();
     const dateElements = useRef();
     const descriptionElements = useRef();
+    const OfficersId = useRef();
 
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
     console.log(retrievedFromStore);
+
     return (
         <>
             {/* Получение и проверка статуса из хранилища НО ПОЛУЧИТЬ НУЖНО ID сотрудника*/}
@@ -82,6 +84,11 @@ function PReport({ signintoken }) {
                     id="typeElements"
                     ref={typeElements}
                 >
+                    <option value="sport">sport</option>
+                    <option value="general">general</option>
+                </select>
+
+                <select name="OfficersId" id="OfficersId" ref={OfficersId}>
                     <option value="sport">sport</option>
                     <option value="general">general</option>
                 </select>
