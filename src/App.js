@@ -8,6 +8,7 @@ import Header from "./Header";
 import Error from "./ErrorPage";
 import DetailCase from "./DetailCase";
 import DetailOfficersData from "./DetailOfficersData";
+import SingupPage from "./SingupPage";
 
 function App() {
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
@@ -25,7 +26,9 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
+
                 <Route path="/detailCase" element={<DetailCase />} />
+                <Route path="/singupPage" element={<SingupPage />} />
 
                 {typeof Casedata === "undefined"
                     ? "нет кейсов"

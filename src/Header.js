@@ -146,6 +146,7 @@ function Header() {
             <NavLink to="/">Click to view our home page</NavLink>
             <NavLink to="/about">Click to view our about page</NavLink>
             <NavLink to="/contact">Click to view our contact page</NavLink>
+            <NavLink to="/singupPage">Регистрация нового пользователя</NavLink>
         </div>
     );
 }

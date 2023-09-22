@@ -1,12 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { allOfficersTodo } from "./todoSlice";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    getAllOfficersreq,
-    deleteOfficersreq,
-    getAllCases,
-    authorization,
-} from "./request";
+import { getAllOfficersreq, deleteOfficersreq } from "./request";
 import { useState, useEffect, useId } from "react";
 
 function Contact() {

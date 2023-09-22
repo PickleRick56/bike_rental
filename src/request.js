@@ -121,7 +121,7 @@ function deleteCaseReq(caseId) {
 
 function editCaseReq(caseId, jSonObject) {
     let newjSonObject = jSonObject;
-    newjSonObject.clientId = "b5813d16-20bc-4e8e-97ad-ff92cc9532c2";
+    newjSonObject.clientId = "0718e5e8-fb23-4947-9f4c-9eea84446cc3";
     return fetch(
         `https://sf-final-project-be.herokuapp.com/api/cases/${caseId}`,
         {
@@ -186,9 +186,28 @@ function editOfficerReq(caseId, jSonObject) {
         .then((response) => response.json())
         .then((json) => console.log(json));
 }
+
+function singupReq(firstName, lastName, email, password, clientId) {
+    return fetch("https://sf-final-project-be.herokuapp.com/api/auth/sign_up", {
+        method: "POST",
+        body: JSON.stringify({
+            email: email,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            clientId: clientId,
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+    })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+}
 // 👇️ named exports
 export {
     singIn,
+    singupReq,
     report,
     authorization,
     getAllCases,
