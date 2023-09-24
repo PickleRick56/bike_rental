@@ -22,9 +22,9 @@ function singIn(email, password) {
             return u.json();
         })
         .then(function (json) {
-            // setJsondata(json);
+            // ТУТ УСТАНАВЛИВАЕМ ЗНАЧЕНИЕ FETCH_TOKEN
             FETCH_TOKEN = json.data.token;
-            console.log(typeof FETCH_TOKEN, " это фетч токен");
+
             console.log(json);
             return json;
         });
@@ -64,6 +64,47 @@ function report(
             }), // body data type must match "Content-Type" header
         }
     )
+        .then(function (u) {
+            return u.json();
+        })
+        .then(function (json) {
+            // setJsondata(json);
+            console.log(json.data);
+            return json.data;
+        });
+}
+
+function officersReportReq(
+    ownerFullName,
+    licenseNumber,
+    type,
+    color,
+    date,
+    description,
+    officer
+) {
+    return fetch("https://sf-final-project-be.herokuapp.com/api/cases/", {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${FETCH_TOKEN}`,
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow", // manual, *follow, error
+        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify({
+            ownerFullName: ownerFullName,
+            licenseNumber: licenseNumber,
+            type: type,
+            color: color,
+            date: date,
+            description: description,
+            officer: officer,
+        }), // body data type must match "Content-Type" header
+    })
         .then(function (u) {
             return u.json();
         })
@@ -218,4 +259,5 @@ export {
     getAllOfficersreq,
     deleteOfficersreq,
     editOfficerReq,
+    officersReportReq,
 };

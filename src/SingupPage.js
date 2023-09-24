@@ -26,15 +26,15 @@ function SingupPage({ prop }) {
                     <input type="text" ref={lastName} />
                 </div>
                 <div>
-                    email
+                    E-mail (обязательное поле)
                     <input type="text" ref={email} />
                 </div>
                 <div>
-                    password
+                    Пароль (обязательное поле)
                     <input type="text" ref={password} />
                 </div>
                 <div>
-                    clientId
+                    Client ID (обязательное поле)
                     <input type="text" ref={clientId} />
                 </div>
                 <button

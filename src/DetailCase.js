@@ -98,7 +98,6 @@ function DetailCase({ prop }) {
                             }
                         }
 
-                        console.log(newJSObject);
                         editCaseReq(location.state.T["_id"], newJSObject);
                     }}
                 >

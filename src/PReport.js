@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
-import { singIn, report, authorization } from "./request";
+import { report, officersReportReq } from "./request";
 
-import { addTodo, replacementTodo } from "./todoSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function PReport({ signintoken }) {
@@ -14,21 +13,14 @@ function PReport({ signintoken }) {
     const OfficersId = useRef();
 
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
-    console.log(retrievedFromStore);
+    console.log(retrievedFromStore, "это все из стора");
 
     return (
         <>
             {/* Получение и проверка статуса из хранилища НО ПОЛУЧИТЬ НУЖНО ID сотрудника*/}
-            {retrievedFromStore[0].text.status === "OK" ? (
-                <div>СТАТУС ОКЭ</div>
-            ) : (
-                <div>СТАТУС НЕ</div>
-            )}
-
-            {/* Получение и проверка статуса из хранилища НО ПОЛУЧИТЬ НУЖНО ID сотрудника*/}
             <form>
                 <label>
-                    Enter your FullName :
+                    ФИО клиента (обязательное поле) :
                     <input
                         id="ownerFullNameElements"
                         ref={ownerFullNameElements}
@@ -38,7 +30,7 @@ function PReport({ signintoken }) {
                 </label>
 
                 <label>
-                    Enter your licenseNumberElements :
+                    Номер лицензии (обязательное поле) :
                     <input
                         id="licenseNumberElements"
                         ref={licenseNumberElements}
@@ -48,7 +40,7 @@ function PReport({ signintoken }) {
                 </label>
 
                 <label>
-                    Enter color :
+                    Цвет велосипеда :
                     <input
                         id="colorElements"
                         ref={colorElements}
@@ -58,7 +50,7 @@ function PReport({ signintoken }) {
                 </label>
 
                 <label>
-                    Enter date :
+                    Дата кражи :
                     <input
                         id="dateElements"
                         ref={dateElements}
@@ -68,7 +60,7 @@ function PReport({ signintoken }) {
                 </label>
 
                 <label>
-                    Enter description :
+                    Дополнительная информация :
                     <input
                         id="descriptionElements"
                         ref={descriptionElements}
@@ -77,7 +69,7 @@ function PReport({ signintoken }) {
                     />
                 </label>
 
-                <label>Choose a type:</label>
+                <label>Тип велосипеда:</label>
 
                 <select
                     name="typeElements"
@@ -88,23 +80,59 @@ function PReport({ signintoken }) {
                     <option value="general">general</option>
                 </select>
 
-                <select name="OfficersId" id="OfficersId" ref={OfficersId}>
-                    <option value="sport">sport</option>
-                    <option value="general">general</option>
-                </select>
+                {retrievedFromStore[0].text.data.user.approved !== false ? (
+                    <>
+                        <label>Список одобренных сотрудников:</label>
+                        <select
+                            name="OfficersId"
+                            id="OfficersId"
+                            ref={OfficersId}
+                        >
+                            {retrievedFromStore[2].text.map(
+                                (k) =>
+                                    k.approved === true && (
+                                        <option value={k["_id"]}>
+                                            {k["_id"]}
+                                        </option>
+                                    )
+                            )}
+                        </select>
+                    </>
+                ) : (
+                    ""
+                )}
 
                 <button
                     onClick={(evt) => {
                         evt.preventDefault();
-
-                        report(
-                            ownerFullNameElements.current.value,
-                            licenseNumberElements.current.value,
-                            typeElements.current.value,
-                            colorElements.current.value,
-                            dateElements.current.value,
-                            descriptionElements.current.value
-                        );
+                        if (
+                            retrievedFromStore[0].text.data.user.approved !==
+                            false
+                        ) {
+                            officersReportReq(
+                                ownerFullNameElements.current.value,
+                                licenseNumberElements.current.value,
+                                typeElements.current.value,
+                                colorElements.current.value,
+                                dateElements.current.value,
+                                descriptionElements.current.value,
+                                OfficersId.current.value
+                            );
+                            console.log(
+                                OfficersId.current.value,
+                                " публичный запрос"
+                            );
+                            console.log(" офицерский запрос");
+                        } else {
+                            report(
+                                ownerFullNameElements.current.value,
+                                licenseNumberElements.current.value,
+                                typeElements.current.value,
+                                colorElements.current.value,
+                                dateElements.current.value,
+                                descriptionElements.current.value
+                            );
+                        }
                     }}
                 >
                     Submit

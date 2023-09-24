@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
-import { singIn, BigButton } from "./request";
-import { addTodo, replacementTodo } from "./todoSlice";
+import { singIn, getAllOfficersreq } from "./request";
+import { addTodo, replacementTodo, allOfficersTodo } from "./todoSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function SignForm({ setSignInToken }) {
@@ -32,7 +32,9 @@ function SignForm({ setSignInToken }) {
             {retrievedFromStore[0].text.data.user.approved !== false ? (
                 <div>
                     {retrievedFromStore[0].text.data.user.firstName}{" "}
-                    <button onClick={logOut}>LogOut</button>
+                    <NavLink to="/">
+                        <button onClick={logOut}>LogOut</button>
+                    </NavLink>
                 </div>
             ) : (
                 <div>
@@ -68,9 +70,15 @@ function SignForm({ setSignInToken }) {
                                 let signInToken = await waitingFetch;
                                 setSignInToken(signInToken);
                                 dispatch(replacementTodo(signInToken));
+                                let awaitFetch = await getAllOfficersreq();
+                                let getAllOfficersr = await awaitFetch;
+
+                                dispatch(
+                                    allOfficersTodo(getAllOfficersr.officers)
+                                );
                             }}
                         >
-                            Submit
+                            Войти
                         </button>
                     </form>
                     <div>
