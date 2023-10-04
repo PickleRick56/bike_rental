@@ -1,94 +1,71 @@
 import { useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { singIn, getAllOfficersreq } from "./request";
 import { addTodo, replacementTodo, allOfficersTodo } from "./todoSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-function SignForm({ setSignInToken }) {
+function SignForm() {
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
     const dispatch = useDispatch();
     const emailElements = useRef();
     const passwordElements = useRef();
-    function logOut() {
-        dispatch(
-            replacementTodo({
-                status: null,
-                data: {
-                    token: null,
-                    user: {
-                        id: null,
-                        email: null,
-                        firstName: null,
-                        lastName: null,
-                        approved: false,
-                    },
-                },
-            })
-        );
-    }
+    const navigate = useNavigate();
 
     return (
         <>
-            {retrievedFromStore[0].text.data.user.approved !== false ? (
-                <div>
-                    {retrievedFromStore[0].text.data.user.firstName}{" "}
-                    <NavLink to="/">
-                        <button onClick={logOut}>LogOut</button>
-                    </NavLink>
-                </div>
-            ) : (
-                <div>
-                    {" "}
-                    <form>
-                        <label>
-                            Enter your E-mail :
-                            <input
-                                id="Email"
-                                ref={emailElements}
-                                type="email"
-                                required
-                            />
-                        </label>
+            <div className="signForm">
+                {retrievedFromStore[0].text.data.user.approved !== false ? (
+                    <div>{retrievedFromStore[0].text.data.user.firstName} </div>
+                ) : (
+                    <>
+                        <form className="signForma">
+                            <label>
+                                E-mail :
+                                <input
+                                    id="Email"
+                                    ref={emailElements}
+                                    type="email"
+                                    required
+                                />
+                            </label>
+                            <label>
+                                PassWord :
+                                <input
+                                    id="password"
+                                    ref={passwordElements}
+                                    type="text"
+                                    required
+                                />
+                            </label>
 
-                        <label>
-                            Enter your PassWord :
-                            <input
-                                id="password"
-                                ref={passwordElements}
-                                type="text"
-                                required
-                            />
-                        </label>
+                            <button
+                                className="SignForm_button"
+                                onClick={async (evt) => {
+                                    evt.preventDefault();
+                                    let waitingFetch = await singIn(
+                                        emailElements.current.value,
+                                        passwordElements.current.value
+                                    );
+                                    let signInToken = await waitingFetch;
 
-                        <button
-                            onClick={async (evt) => {
-                                evt.preventDefault();
-                                let waitingFetch = await singIn(
-                                    emailElements.current.value,
-                                    passwordElements.current.value
-                                );
-                                let signInToken = await waitingFetch;
-                                setSignInToken(signInToken);
-                                dispatch(replacementTodo(signInToken));
-                                let awaitFetch = await getAllOfficersreq();
-                                let getAllOfficersr = await awaitFetch;
+                                    dispatch(replacementTodo(signInToken));
+                                    let awaitFetch = await getAllOfficersreq();
+                                    let getAllOfficersr = await awaitFetch;
 
-                                dispatch(
-                                    allOfficersTodo(getAllOfficersr.officers)
-                                );
-                            }}
-                        >
-                            Войти
-                        </button>
-                    </form>
-                    <div>
-                        {" "}
-                        <NavLink to="/singupPage">
-                            <button>Регистрация нового пользователя</button>
-                        </NavLink>
-                    </div>
-                </div>
-            )}
+                                    dispatch(
+                                        allOfficersTodo(
+                                            getAllOfficersr.officers
+                                        )
+                                    );
+                                    navigate("/");
+                                }}
+                            >
+                                Войти
+                            </button>
+                        </form>
+                    </>
+                )}
+            </div>
         </>
     );
 }

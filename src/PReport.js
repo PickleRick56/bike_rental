@@ -92,7 +92,7 @@ function PReport({ signintoken }) {
                                 (k) =>
                                     k.approved === true && (
                                         <option value={k["_id"]}>
-                                            {k["_id"]}
+                                            {k["lastName"]} {k["firstName"]}
                                         </option>
                                     )
                             )}
