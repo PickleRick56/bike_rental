@@ -133,6 +133,12 @@ function PReport({ signintoken }) {
                                 descriptionElements.current.value
                             );
                         }
+
+                        ownerFullNameElements.current.value = "";
+                        licenseNumberElements.current.value = "";
+                        colorElements.current.value = "";
+                        dateElements.current.value = "";
+                        descriptionElements.current.value = "";
                     }}
                 >
                     Submit
