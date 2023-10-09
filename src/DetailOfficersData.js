@@ -1,13 +1,15 @@
 import { NavLink, useLocation } from "react-router-dom";
-
-import { useRef, useState } from "react";
-import { editOfficerReq } from "./request";
+import { useDispatch } from "react-redux";
+import { allOfficersTodo } from "./todoSlice";
+import { useRef } from "react";
+import { editOfficerReq, getAllOfficersreq } from "./request";
 
 function DetailOfficersData({ prop }) {
     const location = useLocation();
     const firstName = useRef();
     const lastName = useRef();
     const ref = useRef(null);
+    const dispatch = useDispatch();
     let approved = "";
 
     const handleClick = () => {
@@ -60,7 +62,7 @@ function DetailOfficersData({ prop }) {
                     approve
                 </label>
                 <button
-                    onClick={(evt) => {
+                    onClick={async (evt) => {
                         evt.preventDefault();
                         handleClick();
                         let newJSObject = {
@@ -70,13 +72,19 @@ function DetailOfficersData({ prop }) {
                         };
 
                         for (let key in newJSObject) {
-                            console.log(newJSObject[key].length);
                             if (newJSObject[key].length < 1) {
                                 delete newJSObject[key];
                             }
                         }
 
                         editOfficerReq(location.state.Z["_id"], newJSObject);
+
+                        setTimeout(async () => {
+                            let awaitFetch = await getAllOfficersreq();
+                            let getAllOfficersr = await awaitFetch;
+
+                            dispatch(allOfficersTodo(getAllOfficersr.officers));
+                        }, 1000);
                     }}
                 >
                     Submit

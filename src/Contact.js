@@ -9,44 +9,21 @@ function Contact() {
     const dispatch = useDispatch();
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
 
-    async function waitForgetAllOfficers() {
-        let data;
-        let awitFetch = await getAllOfficersreq();
-        data = await awitFetch;
-        setOfficersData(data.officers);
-        dispatch(allOfficersTodo(data.officers));
-        console.log(data.officers);
-    }
-
     function deleteOfficer(e) {
-        let a = [];
-        officersData.map((k) => {
+        let data = [];
+        retrievedFromStore[2].text.map((k) => {
             if (k["_id"] != e) {
-                a.push(k);
+                data.push(k);
             }
         });
-        setOfficersData([...a]);
-        // deleteCaseReq(e);
+        dispatch(allOfficersTodo(data));
+
         deleteOfficersreq(e);
-        console.log(a);
     }
 
     return (
         <div>
             <h1>This is the Officers page</h1>
-
-            {retrievedFromStore[0].text.data.user.approved !== false ? (
-                <button
-                    onClick={(evt) => {
-                        evt.preventDefault();
-                        waitForgetAllOfficers();
-                    }}
-                >
-                    Запросить всех пользователей
-                </button>
-            ) : (
-                ""
-            )}
 
             <NavLink to="/">Click to view our home page</NavLink>
             <NavLink to="/about">Click to view our about page</NavLink>
@@ -54,9 +31,9 @@ function Contact() {
             {retrievedFromStore[0].text.data.user.approved !== false ? (
                 <div>
                     {" "}
-                    {officersData.length > 0 ? (
+                    {retrievedFromStore[2].text.length > 0 ? (
                         <div className="allOfficersData">
-                            {officersData.map((keys) => (
+                            {retrievedFromStore[2].text.map((keys) => (
                                 <div
                                     key={keys["_id"]}
                                     id={keys["_id"]}

@@ -5,46 +5,33 @@ import { getAllCases, deleteCaseReq } from "./request";
 import { useState, useEffect, useId } from "react";
 
 function AllCase() {
-    const [dataAllCase, setDataAllCase] = useState([]);
-
-    const dispatch = useDispatch();
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
-    async function waitForCases() {
-        let data;
-        let awitFetch = await getAllCases();
-        data = await awitFetch;
-        setDataAllCase(await awitFetch.data);
-        dispatch(allCaseTodo(data));
-    }
+    const dispatch = useDispatch();
 
     function deleteCase(e) {
-        let a = [];
-        dataAllCase.map((k) => {
+        let data = [];
+        retrievedFromStore[1].text.data.map((k) => {
             if (k["_id"] != e) {
-                a.push(k);
+                data.push(k);
             }
         });
-        setDataAllCase([...a]);
+
+        dispatch(
+            allCaseTodo({
+                data: data,
+            })
+        );
+
         deleteCaseReq(e);
-        console.log(a);
     }
 
     return (
         <div>
-            <h1> Тут выводим все кейсы</h1>
+            <h1> Тут выводим все кейсы </h1>
 
-            <button
-                onClick={(evt) => {
-                    evt.preventDefault();
-                    waitForCases();
-                }}
-            >
-                Запросить все события
-            </button>
-
-            {dataAllCase.length > 0 ? (
+            {retrievedFromStore[1].text.data.length > 0 && (
                 <div className="allCasesHere">
-                    {dataAllCase.map((keys) => (
+                    {retrievedFromStore[1].text.data.map((keys) => (
                         <div id={keys["_id"]} className="example">
                             <NavLink to={`/${keys["_id"]}`} state={{ T: keys }}>
                                 {keys.ownerFullName}
@@ -62,8 +49,6 @@ function AllCase() {
                         </div>
                     ))}
                 </div>
-            ) : (
-                ""
             )}
         </div>
     );

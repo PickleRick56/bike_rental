@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { singIn, getAllOfficersreq } from "./request";
-import { addTodo, replacementTodo, allOfficersTodo } from "./todoSlice";
+import { singIn, getAllOfficersreq, getAllCases } from "./request";
+import { allCaseTodo, replacementTodo, allOfficersTodo } from "./todoSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function SignForm() {
@@ -57,6 +57,13 @@ function SignForm() {
                                             getAllOfficersr.officers
                                         )
                                     );
+
+                                    //////
+                                    let awaitFetch2 = await getAllCases();
+                                    let getAllCasesR = await awaitFetch2;
+
+                                    dispatch(allCaseTodo(getAllCasesR));
+
                                     navigate("/");
                                 }}
                             >

@@ -12,7 +12,7 @@ function Header() {
     const dispatch = useDispatch();
 
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
-    console.log(location.pathname, "навигация хэдера");
+
     const [signInToken, setSignInToken] = useState({
         status: null,
         data: {

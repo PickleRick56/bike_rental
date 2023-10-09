@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
-import { report, officersReportReq } from "./request";
-
+import { report, officersReportReq, getAllCases } from "./request";
+import { addTodo, replacementTodo, allCaseTodo } from "./todoSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function PReport({ signintoken }) {
@@ -11,7 +11,7 @@ function PReport({ signintoken }) {
     const dateElements = useRef();
     const descriptionElements = useRef();
     const OfficersId = useRef();
-
+    const dispatch = useDispatch();
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
     console.log(retrievedFromStore, "это все из стора");
 
@@ -103,7 +103,7 @@ function PReport({ signintoken }) {
                 )}
 
                 <button
-                    onClick={(evt) => {
+                    onClick={async (evt) => {
                         evt.preventDefault();
                         if (
                             retrievedFromStore[0].text.data.user.approved !==
@@ -120,9 +120,8 @@ function PReport({ signintoken }) {
                             );
                             console.log(
                                 OfficersId.current.value,
-                                " публичный запрос"
+                                "офицерский запрос"
                             );
-                            console.log(" офицерский запрос");
                         } else {
                             report(
                                 ownerFullNameElements.current.value,
@@ -132,6 +131,7 @@ function PReport({ signintoken }) {
                                 dateElements.current.value,
                                 descriptionElements.current.value
                             );
+                            console.log(" публичный запрос");
                         }
 
                         ownerFullNameElements.current.value = "";
@@ -139,6 +139,13 @@ function PReport({ signintoken }) {
                         colorElements.current.value = "";
                         dateElements.current.value = "";
                         descriptionElements.current.value = "";
+
+                        setTimeout(async () => {
+                            let data;
+                            let awitFetch = await getAllCases();
+                            data = await awitFetch;
+                            dispatch(allCaseTodo(data));
+                        }, 1000);
                     }}
                 >
                     Submit
