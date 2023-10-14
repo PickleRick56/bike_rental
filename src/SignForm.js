@@ -16,7 +16,10 @@ function SignForm() {
         <>
             <div className="signForm">
                 {retrievedFromStore[0].text.data.user.approved !== false ? (
-                    <div>{retrievedFromStore[0].text.data.user.firstName} </div>
+                    <div>
+                        С возвращением{" "}
+                        {retrievedFromStore[0].text.data.user.firstName}{" "}
+                    </div>
                 ) : (
                     <>
                         <form className="signForma">

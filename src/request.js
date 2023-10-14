@@ -24,7 +24,7 @@ function singIn(email, password) {
         .then(function (json) {
             // ТУТ УСТАНАВЛИВАЕМ ЗНАЧЕНИЕ FETCH_TOKEN
             console.log(json);
-            if (json.status === 200) {
+            if (json.status === "OK") {
                 FETCH_TOKEN = json.data.token;
             }
 
