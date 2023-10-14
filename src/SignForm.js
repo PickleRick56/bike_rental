@@ -1,10 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { singIn, getAllOfficersreq, getAllCases } from "./request";
 import { allCaseTodo, replacementTodo, allOfficersTodo } from "./todoSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function SignForm() {
+    const [useErrorIndicator, serErrorIndicator] = useState(false);
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
     const dispatch = useDispatch();
     const emailElements = useRef();
@@ -48,28 +49,39 @@ function SignForm() {
                                     );
                                     let signInToken = await waitingFetch;
 
-                                    dispatch(replacementTodo(signInToken));
-                                    let awaitFetch = await getAllOfficersreq();
-                                    let getAllOfficersr = await awaitFetch;
+                                    if (signInToken.status === "OK") {
+                                        dispatch(replacementTodo(signInToken));
+                                        let awaitFetch =
+                                            await getAllOfficersreq();
+                                        let getAllOfficersr = await awaitFetch;
 
-                                    dispatch(
-                                        allOfficersTodo(
-                                            getAllOfficersr.officers
-                                        )
-                                    );
+                                        dispatch(
+                                            allOfficersTodo(
+                                                getAllOfficersr.officers
+                                            )
+                                        );
 
-                                    //////
-                                    let awaitFetch2 = await getAllCases();
-                                    let getAllCasesR = await awaitFetch2;
+                                        //////
+                                        let awaitFetch2 = await getAllCases();
+                                        let getAllCasesR = await awaitFetch2;
 
-                                    dispatch(allCaseTodo(getAllCasesR));
+                                        dispatch(allCaseTodo(getAllCasesR));
 
-                                    navigate("/");
+                                        navigate("/");
+                                    } else {
+                                        serErrorIndicator(true);
+                                    }
                                 }}
                             >
                                 Войти
                             </button>
                         </form>
+                        {useErrorIndicator && (
+                            <div>
+                                ОШИБКА АВТОРИЗАЦИИ (возможно неверный логи или
+                                пароль)
+                            </div>
+                        )}
                     </>
                 )}
             </div>

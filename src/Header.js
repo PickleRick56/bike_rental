@@ -45,7 +45,11 @@ function Header() {
         );
         navigate("/");
     }
-
+    window.addEventListener("beforeunload", (ev) => {
+        ev.preventDefault();
+        localStorage.setItem("test", 7);
+        return (ev.returnValue = "Are you sure you want to close?");
+    });
     return (
         <header>
             <div className="header_firstRaw">

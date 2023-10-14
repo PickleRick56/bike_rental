@@ -23,9 +23,11 @@ function singIn(email, password) {
         })
         .then(function (json) {
             // ТУТ УСТАНАВЛИВАЕМ ЗНАЧЕНИЕ FETCH_TOKEN
-            FETCH_TOKEN = json.data.token;
-
             console.log(json);
+            if (json.status === 200) {
+                FETCH_TOKEN = json.data.token;
+            }
+
             return json;
         });
 }

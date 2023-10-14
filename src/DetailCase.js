@@ -1,9 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
-import PReport from "./PReport";
-import AllCase from "./AllCase";
-import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect, useId, useRef } from "react";
-import { singIn, report, editCaseReq } from "./request";
+import { useRef } from "react";
+import { editCaseReq } from "./request";
 
 function DetailCase({ prop }) {
     const location = useLocation();
