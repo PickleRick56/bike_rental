@@ -1,7 +1,7 @@
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-
-import { addTodo, replacementTodo } from "./todoSlice";
+import { singIn, getAllOfficersreq, getAllCases } from "./request";
+import { replacementTodo, allCaseTodo, allOfficersTodo } from "./todoSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 import SignForm from "./SignForm";
@@ -28,6 +28,7 @@ function Header() {
     });
 
     function logOut() {
+        localStorage.clear();
         dispatch(
             replacementTodo({
                 status: null,
@@ -47,9 +48,41 @@ function Header() {
     }
     window.addEventListener("beforeunload", (ev) => {
         ev.preventDefault();
-        localStorage.setItem("test", 7);
+        localStorage.setItem("token", retrievedFromStore[0].text.data.token);
         return (ev.returnValue = "Are you sure you want to close?");
     });
+
+    useEffect(() => {
+        let localStoregeToken = localStorage.getItem("token");
+        if (localStoregeToken !== "null") {
+            let email = localStorage.getItem("email");
+            let password = localStorage.getItem("password");
+            logIN(email, password);
+        }
+        // This side effect will only run once, after the first render
+    }, []);
+
+    async function logIN(email, password) {
+        let waitingFetch = await singIn(email, password);
+        let signInToken = await waitingFetch;
+
+        if (signInToken.status === "OK") {
+            dispatch(replacementTodo(signInToken));
+            let awaitFetch = await getAllOfficersreq();
+            let getAllOfficersr = await awaitFetch;
+
+            dispatch(allOfficersTodo(getAllOfficersr.officers));
+
+            //////
+            let awaitFetch2 = await getAllCases();
+            let getAllCasesR = await awaitFetch2;
+
+            dispatch(allCaseTodo(getAllCasesR));
+
+            navigate("/");
+        }
+    }
+
     return (
         <header>
             <div className="header_firstRaw">

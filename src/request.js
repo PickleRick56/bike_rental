@@ -1,5 +1,5 @@
 const fisrtAdress = "adress31@gmail.com";
-let FETCH_TOKEN = "";
+let FETCH_TOKEN = localStorage.getItem("token");
 
 function singIn(email, password) {
     return fetch("https://sf-final-project-be.herokuapp.com/api/auth/sign_in", {
@@ -23,9 +23,13 @@ function singIn(email, password) {
         })
         .then(function (json) {
             // ТУТ УСТАНАВЛИВАЕМ ЗНАЧЕНИЕ FETCH_TOKEN
-            console.log(json);
+
             if (json.status === "OK") {
+                console.log(json.data.token);
                 FETCH_TOKEN = json.data.token;
+                console.log(email, password);
+                localStorage.setItem("email", email);
+                localStorage.setItem("password", password);
             }
 
             return json;
