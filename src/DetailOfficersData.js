@@ -1,10 +1,12 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { allOfficersTodo } from "./todoSlice";
 import { useRef } from "react";
 import { editOfficerReq, getAllOfficersreq } from "./request";
 
 function DetailOfficersData({ prop }) {
+    const navigate = useNavigate();
     const location = useLocation();
     const firstName = useRef();
     const lastName = useRef();
@@ -84,6 +86,7 @@ function DetailOfficersData({ prop }) {
                             let getAllOfficersr = await awaitFetch;
 
                             dispatch(allOfficersTodo(getAllOfficersr.officers));
+                            navigate("/contact");
                         }, 1000);
                     }}
                 >

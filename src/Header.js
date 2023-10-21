@@ -1,6 +1,6 @@
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { singIn, getAllOfficersreq, getAllCases } from "./request";
+import { authorization, getAllOfficersreq, getAllCases } from "./request";
 import { replacementTodo, allCaseTodo, allOfficersTodo } from "./todoSlice";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -46,41 +46,46 @@ function Header() {
         );
         navigate("/");
     }
-    window.addEventListener("beforeunload", (ev) => {
-        ev.preventDefault();
-        localStorage.setItem("token", retrievedFromStore[0].text.data.token);
-        return (ev.returnValue = "Are you sure you want to close?");
-    });
+    // window.addEventListener("beforeunload", (ev) => {
+    //     ev.preventDefault();
+    //     localStorage.setItem("token", retrievedFromStore[0].text.data.token);
+    //     return (ev.returnValue = "Are you sure you want to close?");
+    // });
 
     useEffect(() => {
-        let localStoregeToken = localStorage.getItem("token");
-        if (localStoregeToken !== "null") {
-            let email = localStorage.getItem("email");
-            let password = localStorage.getItem("password");
-            logIN(email, password);
+        async function checkAuthorization() {
+            let fetch = await authorization();
+            let awaitFetch = await fetch;
+            if (awaitFetch.status === "OK") {
+                dispatch(
+                    replacementTodo({
+                        status: awaitFetch.status,
+                        data: {
+                            token: awaitFetch.data.token,
+                            user: awaitFetch.data.user,
+                        },
+                    })
+                );
+                logIN();
+            }
         }
+        checkAuthorization();
+
         // This side effect will only run once, after the first render
     }, []);
 
-    async function logIN(email, password) {
-        let waitingFetch = await singIn(email, password);
-        let signInToken = await waitingFetch;
+    async function logIN() {
+        let awaitFetch = await getAllOfficersreq();
+        let getAllOfficersr = await awaitFetch;
 
-        if (signInToken.status === "OK") {
-            dispatch(replacementTodo(signInToken));
-            let awaitFetch = await getAllOfficersreq();
-            let getAllOfficersr = await awaitFetch;
+        dispatch(allOfficersTodo(getAllOfficersr.officers));
 
-            dispatch(allOfficersTodo(getAllOfficersr.officers));
+        let awaitFetch2 = await getAllCases();
+        let getAllCasesR = await awaitFetch2;
 
-            //////
-            let awaitFetch2 = await getAllCases();
-            let getAllCasesR = await awaitFetch2;
+        dispatch(allCaseTodo(getAllCasesR));
 
-            dispatch(allCaseTodo(getAllCasesR));
-
-            navigate("/");
-        }
+        navigate("/");
     }
 
     return (

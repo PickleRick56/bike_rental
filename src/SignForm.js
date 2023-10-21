@@ -72,7 +72,7 @@ function SignForm() {
 
                                         navigate("/");
                                     } else {
-                                        serErrorIndicator(true);
+                                        serErrorIndicator(signInToken.message);
                                     }
                                 }}
                             >
@@ -80,10 +80,7 @@ function SignForm() {
                             </button>
                         </form>
                         {useErrorIndicator && (
-                            <div>
-                                ОШИБКА АВТОРИЗАЦИИ (возможно неверный логи или
-                                пароль)
-                            </div>
+                            <div>ОШИБКА АВТОРИЗАЦИИ ({useErrorIndicator})</div>
                         )}
                     </>
                 )}

@@ -51,10 +51,6 @@ function Contact() {
                                             deleteOfficer(
                                                 evt.target.parentElement.id
                                             );
-
-                                            console.log(
-                                                evt.target.parentElement.id
-                                            );
                                         }}
                                     >
                                         X

@@ -40,8 +40,6 @@ function AllCase() {
                                 onClick={(evt) => {
                                     evt.preventDefault();
                                     deleteCase(evt.target.parentElement.id);
-
-                                    console.log(evt.target.parentElement.id);
                                 }}
                             >
                                 X

@@ -18,7 +18,6 @@ function App() {
 
     let Casedata = retrievedFromStore[1].text.data;
     let Officersdata = retrievedFromStore[2].text;
-    console.log(retrievedFromStore, "дата всех officers для роутинга ");
 
     return (
         <div className="App">

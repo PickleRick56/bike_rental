@@ -13,7 +13,6 @@ function PReport({ signintoken }) {
     const OfficersId = useRef();
     const dispatch = useDispatch();
     const retrievedFromStore = useSelector((state) => state.todo.tasks);
-    console.log(retrievedFromStore, "это все из стора");
 
     return (
         <>
@@ -118,10 +117,6 @@ function PReport({ signintoken }) {
                                 descriptionElements.current.value,
                                 OfficersId.current.value
                             );
-                            console.log(
-                                OfficersId.current.value,
-                                "офицерский запрос"
-                            );
                         } else {
                             report(
                                 ownerFullNameElements.current.value,
@@ -131,7 +126,6 @@ function PReport({ signintoken }) {
                                 dateElements.current.value,
                                 descriptionElements.current.value
                             );
-                            console.log(" публичный запрос");
                         }
 
                         ownerFullNameElements.current.value = "";
