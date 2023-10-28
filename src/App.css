@@ -3,6 +3,11 @@ body {
     height: 100%;
     margin: 0;
 }
+* {
+    box-sizing: border-box;
+    font-family: Inter, -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+        sans-serif;
+}
 
 #root {
     height: 100%;
@@ -12,15 +17,24 @@ body {
     text-align: center;
 }
 
+a:link,
+a:active,
+a:visited,
+a:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
 .active {
-    background-color: red;
+    border-bottom: medium solid #1e8449;
 }
 
 .wrapper {
-    min-height: 100%;
+    /* min-height: 100%; */
+    min-height: 88vh;
     display: flex;
     flex-direction: column;
-    margin-bottom: -100px;
+    /* margin-bottom: -100px; */
 }
 
 main {
@@ -35,18 +49,130 @@ footer {
 
 /* ФОРМА */
 .header_firstRaw {
+    box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
+    border-radius: 20px;
+    max-width: 1200px;
+    height: 5vh;
+    margin: 0 auto;
+
+    column-gap: 3%;
+    white-space: nowrap;
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.logoSvg {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.header_links {
+    display: flex;
+    column-gap: 2%;
+}
+
+.homePageIcon,
+.reportPageIcon,
+.employeesPageIcon {
+    display: none;
+    width: 30px;
+    height: 30px;
+    fill: #000000;
 }
 
 .signForm {
     display: flex;
     flex-direction: column;
 }
-.signForma {
-}
 
 .SignForm_button {
     align-self: center;
     width: 50px;
+}
+
+button {
+    appearance: none;
+    backface-visibility: hidden;
+    background-color: #27ae60;
+    border-radius: 8px;
+    border-style: none;
+    box-shadow: rgba(39, 174, 96, 0.15) 0 4px 9px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter, -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+        sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.5;
+    outline: none;
+    overflow: hidden;
+    padding: 2px 20px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transform: translate3d(0, 0, 0);
+    transition: all 0.3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+button:hover {
+    background-color: #1e8449;
+    opacity: 1;
+    transform: translateY(0);
+    transition-duration: 0.35s;
+}
+
+button:active {
+    transform: translateY(2px);
+    transition-duration: 0.35s;
+}
+
+button:hover {
+    box-shadow: rgba(39, 174, 96, 0.2) 0 6px 12px;
+}
+
+/* special */
+.max-width_1200 {
+    margin: 0 auto;
+    width: min(75%, 1200px);
+}
+
+@media (max-width: 1250px) {
+    .header_firstRaw {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        column-gap: 3%;
+        white-space: nowrap;
+        display: flex;
+
+        box-sizing: border-box;
+    }
+
+    .header_links {
+        width: 30%;
+        display: flex;
+        justify-content: space-around;
+    }
+}
+@media (max-width: 700px) {
+    .reportPageSpan,
+    .employeesPageSpan {
+        display: none;
+    }
+
+    .reportPageIcon,
+    .employeesPageIcon {
+        display: block;
+    }
 }
