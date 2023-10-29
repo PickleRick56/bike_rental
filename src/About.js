@@ -9,7 +9,7 @@ function About({ prop }) {
     return (
         <>
             <div>
-                <h1> Доступный всем РЕПОРТ page</h1>
+                <h1> Сообщить о потере велосипеда</h1>
 
                 <NavLink to="/contact">Click to view our contact page</NavLink>
                 <PReport></PReport>

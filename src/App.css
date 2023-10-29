@@ -47,6 +47,74 @@ footer {
     margin-top: auto;
 }
 
+input {
+    color: #000;
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+input:focus,
+input[type]:focus,
+.uneditable-input:focus {
+    outline: none !important;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+    margin-bottom: 12px;
+}
+
+.input_submit {
+    width: min-content;
+    height: 35px;
+    border-radius: 5px;
+    background: #fff;
+
+    margin-bottom: 12px;
+    border: none;
+}
+
+.form_size_370 {
+    background-color: #fff;
+
+    padding: 5px 0 5px 5px;
+    max-width: fit-content;
+    margin: 0 auto;
+    text-align: left;
+    border: none;
+}
+
+.form_size_370_Button {
+    margin-left: -100px;
+    left: 100%;
+}
+
+select {
+    padding-left: 4px;
+    border: none;
+    color: #000;
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+select:focus > option:checked {
+    color: #000;
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border: none;
+}
+
 /* ФОРМА */
 .header_firstRaw {
     box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
@@ -141,10 +209,46 @@ button:hover {
     box-shadow: rgba(39, 174, 96, 0.2) 0 6px 12px;
 }
 
+/* All Cases */
+.allCasesHere {
+    width: fit-content;
+    margin: 0 auto;
+}
+.allCasesHere div {
+    justify-content: space-between;
+    display: flex;
+
+    margin-bottom: 5px;
+}
+
+.allCasesHere div button {
+    margin-left: 8px;
+}
+
+/* Officers */
+
+.allOfficersData {
+    width: fit-content;
+    margin: 0 auto;
+}
+.allOfficersData div {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 12px;
+    margin-bottom: 5px;
+}
+
 /* special */
 .max-width_1200 {
     margin: 0 auto;
     width: min(75%, 1200px);
+}
+
+.mg-bottom_-1 {
+    margin-bottom: -1px;
+}
+.mg-bottom_12 {
+    margin-bottom: 12px;
 }
 
 @media (max-width: 1250px) {

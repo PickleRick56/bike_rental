@@ -23,10 +23,7 @@ function Contact() {
 
     return (
         <div>
-            <h1>This is the Officers page</h1>
-
-            <NavLink to="/">Click to view our home page</NavLink>
-            <NavLink to="/about">Click to view our about page</NavLink>
+            <h1>Страница сотрудников</h1>
 
             {retrievedFromStore[0].text.data.user.approved !== false ? (
                 <div>

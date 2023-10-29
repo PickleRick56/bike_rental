@@ -1,8 +1,9 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useRef } from "react";
 import { editCaseReq } from "./request";
 
 function DetailCase({ prop }) {
+    const navigate = useNavigate();
     const location = useLocation();
     const ownerFullNameElements = useRef();
     const licenseNumberElements = useRef();
@@ -14,13 +15,12 @@ function DetailCase({ prop }) {
     return (
         <div>
             <h1> Детализированная РЕПОРТ page</h1>
-            <NavLink to="/">Click to view our home page</NavLink>
-            <div>ТУТ ЧТОТО НАПИСАНО</div>
 
-            <form id={location.state.T["_id"]}>
+            <form className="form_size_370" id={location.state.T["_id"]}>
                 <div>
-                    Номер лицензии
+                    Номер лицензии:
                     <input
+                        className="input_submit"
                         type="text"
                         id={location.state.T["licenseNumber"]}
                         ref={licenseNumberElements}
@@ -28,8 +28,9 @@ function DetailCase({ prop }) {
                     />
                 </div>
                 <div>
-                    Имя
+                    Имя:
                     <input
+                        className="input_submit"
                         type="text"
                         id={location.state.T["ownerFullName"]}
                         ref={ownerFullNameElements}
@@ -38,7 +39,7 @@ function DetailCase({ prop }) {
                     />
                 </div>
                 <div>
-                    Тип
+                    Тип:
                     <select
                         name="typeElements"
                         id={location.state.T["type"]}
@@ -49,8 +50,9 @@ function DetailCase({ prop }) {
                     </select>
                 </div>
                 <div>
-                    Цвет
+                    Цвет:
                     <input
+                        className="input_submit"
                         type="text"
                         id={location.state.T["color"]}
                         ref={colorElements}
@@ -59,8 +61,9 @@ function DetailCase({ prop }) {
                 </div>
 
                 <div>
-                    дата
+                    дата:
                     <input
+                        className="input_submit"
                         type="text"
                         id={location.state.T["date"]}
                         ref={dateElements}
@@ -68,8 +71,9 @@ function DetailCase({ prop }) {
                     />
                 </div>
                 <div>
-                    описание
+                    описание:
                     <input
+                        className="input_submit"
                         type="text"
                         id={location.state.T["description"]}
                         ref={descriptionElements}
@@ -77,6 +81,7 @@ function DetailCase({ prop }) {
                     />
                 </div>
                 <button
+                    className="form_size_370_Button"
                     onClick={(evt) => {
                         evt.preventDefault();
                         let newJSObject = {
@@ -96,12 +101,12 @@ function DetailCase({ prop }) {
                         }
 
                         editCaseReq(location.state.T["_id"], newJSObject);
+                        navigate("/about");
                     }}
                 >
                     Submit
                 </button>
             </form>
-            <NavLink to="/contact">Click to view our contact page</NavLink>
         </div>
     );
 }

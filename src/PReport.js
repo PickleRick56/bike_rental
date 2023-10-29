@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { report, officersReportReq, getAllCases } from "./request";
-import { addTodo, replacementTodo, allCaseTodo } from "./todoSlice";
+import { allCaseTodo } from "./todoSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function PReport({ signintoken }) {
@@ -17,7 +17,7 @@ function PReport({ signintoken }) {
     return (
         <>
             {/* Получение и проверка статуса из хранилища НО ПОЛУЧИТЬ НУЖНО ID сотрудника*/}
-            <form>
+            <form className="form_size_370">
                 <label>
                     ФИО клиента (обязательное поле) :
                     <input
@@ -68,40 +68,47 @@ function PReport({ signintoken }) {
                     />
                 </label>
 
-                <label>Тип велосипеда:</label>
-
-                <select
-                    name="typeElements"
-                    id="typeElements"
-                    ref={typeElements}
-                >
-                    <option value="sport">sport</option>
-                    <option value="general">general</option>
-                </select>
+                <label>
+                    Тип велосипеда:
+                    <select
+                        name="typeElements"
+                        id="typeElements"
+                        ref={typeElements}
+                    >
+                        <option value="sport">sport</option>
+                        <option value="general">general</option>
+                    </select>
+                </label>
 
                 {retrievedFromStore[0].text.data.user.approved !== false ? (
                     <>
-                        <label>Список одобренных сотрудников:</label>
-                        <select
-                            name="OfficersId"
-                            id="OfficersId"
-                            ref={OfficersId}
-                        >
-                            {retrievedFromStore[2].text.map(
-                                (k) =>
-                                    k.approved === true && (
-                                        <option value={k["_id"]}>
-                                            {k["lastName"]} {k["firstName"]}
-                                        </option>
-                                    )
-                            )}
-                        </select>
+                        <label>
+                            Список одобренных сотрудников:
+                            <select
+                                name="OfficersId"
+                                id="OfficersId"
+                                ref={OfficersId}
+                            >
+                                {Object.keys(retrievedFromStore[2].text)
+                                    .length !== 0 &&
+                                    retrievedFromStore[2].text.map(
+                                        (k) =>
+                                            k.approved === true && (
+                                                <option value={k["_id"]}>
+                                                    {k["lastName"]}{" "}
+                                                    {k["firstName"]}
+                                                </option>
+                                            )
+                                    )}
+                            </select>
+                        </label>
                     </>
                 ) : (
                     ""
                 )}
 
                 <button
+                    className="form_size_370_Button"
                     onClick={async (evt) => {
                         evt.preventDefault();
                         if (

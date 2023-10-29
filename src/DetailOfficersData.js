@@ -26,17 +26,15 @@ function DetailOfficersData({ prop }) {
         <div>
             <h1>
                 {" "}
-                Officer {location.state.Z["firstName"]}
+                Сотрудник {location.state.Z["firstName"]}
                 {location.state.Z["lastName"]}
             </h1>
-            <NavLink to="/">Click to view our home page</NavLink>
 
-            <NavLink to="/contact">Click to view our contact page</NavLink>
-
-            <form action="">
+            <form className="form_size_370" action="">
                 <div>
-                    Имя
+                    Имя:
                     <input
+                        className="input_submit"
                         type="text"
                         id={location.state.Z["firstName"]}
                         ref={firstName}
@@ -44,24 +42,28 @@ function DetailOfficersData({ prop }) {
                     />
                 </div>
                 <div>
-                    Фамилия
+                    Фамилия:
                     <input
+                        className="input_submit"
                         type="text"
                         id={location.state.Z["lastName"]}
                         ref={lastName}
                         placeholder={location.state.Z["lastName"]}
                     />
                 </div>
-                <div>{location.state.Z["email"]}</div>
+                <div className="mg-bottom_12">
+                    Адрес: {location.state.Z["email"]}
+                </div>
                 <label htmlFor="approved">
+                    Одобрить:
                     <input
+                        className="input_submit mg-bottom_-1"
                         ref={ref}
                         type="checkbox"
                         id="approved"
                         name="approved"
                         defaultChecked
                     />
-                    approve
                 </label>
                 <button
                     onClick={async (evt) => {
