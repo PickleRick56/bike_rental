@@ -12,31 +12,28 @@ function SingupPage({ prop }) {
     return (
         <div>
             <h1> РЕГИСТРАЦИЯ НОВОГО ПОЛЬЗОВАТЕЛЯ </h1>
-            <NavLink to="/">Click to view our home page</NavLink>
 
-            <NavLink to="/contact">Click to view our contact page</NavLink>
-
-            <form action="">
-                <div>
+            <form action="" className="signForm">
+                <label>
                     Имя
                     <input type="text" ref={firstName} />
-                </div>
-                <div>
+                </label>
+                <label>
                     Фафмилия
                     <input type="text" ref={lastName} />
-                </div>
-                <div>
+                </label>
+                <label>
                     E-mail (обязательное поле)
                     <input type="text" ref={email} />
-                </div>
-                <div>
+                </label>
+                <label>
                     Пароль (обязательное поле)
                     <input type="text" ref={password} />
-                </div>
-                <div>
+                </label>
+                <label>
                     Client ID (обязательное поле)
                     <input type="text" ref={clientId} />
-                </div>
+                </label>
                 <button
                     onClick={(evt) => {
                         evt.preventDefault();

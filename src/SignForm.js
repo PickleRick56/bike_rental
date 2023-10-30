@@ -22,7 +22,7 @@ function SignForm() {
                     </div>
                 ) : (
                     <>
-                        <form className="signForma">
+                        <form className="signForm">
                             <label>
                                 E-mail :
                                 <input

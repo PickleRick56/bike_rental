@@ -11,7 +11,6 @@ function About({ prop }) {
             <div>
                 <h1> Сообщить о потере велосипеда</h1>
 
-                <NavLink to="/contact">Click to view our contact page</NavLink>
                 <PReport></PReport>
             </div>
             {retrievedFromStore[0].text.data.user.approved !== false ? (
