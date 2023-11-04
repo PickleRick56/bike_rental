@@ -22,9 +22,10 @@ function SignForm() {
                     </div>
                 ) : (
                     <>
+                        <h1>Вход</h1>
                         <form className="signForm">
                             <label>
-                                E-mail :
+                                E-mail:
                                 <input
                                     id="Email"
                                     ref={emailElements}
@@ -33,7 +34,7 @@ function SignForm() {
                                 />
                             </label>
                             <label>
-                                PassWord :
+                                PassWord:
                                 <input
                                     id="password"
                                     ref={passwordElements}

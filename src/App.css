@@ -3,6 +3,7 @@ body {
     height: 100%;
     margin: 0;
 }
+
 * {
     box-sizing: border-box;
     font-family: Inter, -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
@@ -42,15 +43,34 @@ main {
 }
 
 footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rebeccapurple;
     height: 100px;
+
     margin-top: auto;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: max(50%, 20px);
+    color: #fff;
+    list-style: none;
+    width: max(30%, 20px);
+    padding: 0;
+}
+
+.nav span {
+    color: #fff;
 }
 
 input {
     color: #000;
     font-family: Roboto;
-    font-size: 18px;
+
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -239,6 +259,20 @@ button:hover {
     margin-bottom: 5px;
 }
 
+/* slider */
+.my_slick_style_img {
+    width: 100%;
+}
+
+.slick-next:before,
+.slick-prev:before {
+    color: rebeccapurple;
+}
+
+/* home */
+.disc {
+    text-align: left;
+}
 /* special */
 .max-width_1200 {
     margin: 0 auto;
@@ -251,6 +285,8 @@ button:hover {
 .mg-bottom_12 {
     margin-bottom: 12px;
 }
+
+/* media */
 
 @media (max-width: 1250px) {
     .header_firstRaw {

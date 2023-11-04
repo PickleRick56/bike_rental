@@ -353,8 +353,6 @@ function Header() {
             {/* <button onClick={() => dispatch(replacementTodo(signInToken))}>
                 click
             </button> */}
-
-            <h1>This is the home header</h1>
         </header>
     );
 }

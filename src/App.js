@@ -53,7 +53,41 @@ function App() {
                     <Route path="*" element={<Error />} />
                 </Routes>
             </div>
-            <footer id="footer"></footer>
+            <footer id="footer">
+                <ul class="nav nav-links footer-nav">
+                    <li>
+                        <a href="http://vk.com/velomesto" target="_blank">
+                            <span class="fa fa-vk icon-left"></span>
+                            <span class="sr-only">Вконтакте</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.facebook.com/velomesto"
+                            target="_blank"
+                        >
+                            <span class="fa fa-facebook icon-left"></span>
+                            <span class="sr-only">Facebook</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/velomesto" target="_blank">
+                            <span class="fa fa-twitter icon-left"></span>
+                            <span class="sr-only">Twitter</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://plus.google.com/110011375304314630440"
+                            target="_blank"
+                            rel="publisher"
+                        >
+                            <span class="fa fa-google-plus icon-left"></span>
+                            <span class="sr-only">Google+</span>
+                        </a>
+                    </li>
+                </ul>
+            </footer>
         </div>
     );
 }
