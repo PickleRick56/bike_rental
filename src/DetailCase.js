@@ -1,6 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useRef } from "react";
-import { editCaseReq } from "./request";
+import { editCaseReq, getAllCases } from "./request";
+import { useDispatch } from "react-redux";
+import { allCaseTodo } from "./todoSlice";
 
 function DetailCase({ prop }) {
     const navigate = useNavigate();
@@ -11,6 +13,7 @@ function DetailCase({ prop }) {
     const colorElements = useRef();
     const dateElements = useRef();
     const descriptionElements = useRef();
+    const dispatch = useDispatch();
 
     return (
         <div>
@@ -101,7 +104,14 @@ function DetailCase({ prop }) {
                         }
 
                         editCaseReq(location.state.T["_id"], newJSObject);
-                        navigate("/about");
+
+                        setTimeout(async () => {
+                            let awaitFetch = await getAllCases();
+                            let getAllCasesR = await awaitFetch;
+
+                            dispatch(allCaseTodo(getAllCasesR));
+                            navigate("/about");
+                        }, 1000);
                     }}
                 >
                     Submit
